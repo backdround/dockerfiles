@@ -4,6 +4,7 @@ FROM archlinux:latest
 WORKDIR /root/
 ENTRYPOINT []
 CMD ["/usr/bin/zsh"]
+ENV SHELL=zsh TERM=xterm-256color
 
 # Install from script.
 RUN pacman --noconfirm -Syu git sudo
@@ -13,7 +14,6 @@ RUN cd ~ \
   && ./auxiliary/init.sh server
 
 # Install zsh plugins
-ENV SHELL=zsh
 RUN zsh -ic "sleep 0.5"
 
 # Install neovim plugins
