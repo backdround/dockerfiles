@@ -6,7 +6,7 @@ ENTRYPOINT []
 CMD ["/usr/bin/zsh"]
 ENV SHELL=zsh TERM=xterm-256color
 
-# Install from script.
+# Install from script
 RUN pacman --noconfirm -Syu git sudo
 RUN cd ~ \
   && git clone https://github.com/backdround/configuration.git \
@@ -25,3 +25,6 @@ RUN COC_PLUGINS=$(nvim --headless +'echo g:coc_global_extensions' +'echo "\n"' +
   | head -1 | tr -d ",[]'" | tr ' ' '\n') \
   && echo "$COC_PLUGINS" \
   | xargs -i sh -c 'nvim --headless +"CocInstall -sync {}" +qa 2> /dev/null && echo "{} installed"'
+
+# Install tmux plugins
+RUN tmux -c exit
